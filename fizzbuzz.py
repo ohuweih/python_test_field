@@ -1,6 +1,6 @@
 #!/usr/bin/python
 import argparse
-import threading
+from multiprocessing import Process
 
 # Create the parser
 my_parser = argparse.ArgumentParser(description='The Number we will be using')
@@ -18,7 +18,7 @@ def FizzBuzz(input_arg):
         output = "FizzBuzz"
     else:
         output = input_arg
-    print(output)
+    return output
 
 
 def Buzz(input_arg):
@@ -26,7 +26,7 @@ def Buzz(input_arg):
         output = "Buzz"
     else:
         output = input_arg
-    print(output)
+    return output
 
 
 def Fizz(input_arg):
@@ -34,21 +34,30 @@ def Fizz(input_arg):
         output = "Fizz"
     else:
         output = input_arg
-    print(output)
-
+    return output
 
 if __name__ == "__main__":
-    # creating thread
-    t1 = threading.Thread(target=FizzBuzz, args=(input_arg, ))
-    t2 = threading.Thread(target=Buzz, args=(input_arg, ))
-    t3 = threading.Thread(target=Fizz, args=(input_arg, ))
+    # creating processes
+    p1 = Process(target=FizzBuzz, args=(input_arg, ))
+    p2 = Process(target=Buzz, args=(input_arg, ))
+    p3 = Process(target=Fizz, args=(input_arg, ))
 
-    # Starting Thread
-    t1.start()
-    t2.start()
-    t3.start()
+    # Starting processes
+    p1.start()
+    p2.start()
+    p3.start()
 
-    # Wait until Thread is complete
-    t1.join()
-    t2.join()
-    t3.join()
+    # Wait until processes is complete
+    p1.join()
+    p2.join()
+    p3.join()
+    
+
+    if (FizzBuzz(input_arg) == "FizzBuzz"):
+        print(FizzBuzz(input_arg))
+    elif (Buzz(input_arg) == "Buzz"):
+        print(Buzz(input_arg))
+    elif (Fizz(input_arg) == "Fizz"):
+        print(Fizz(input_arg))
+    else:
+        print(input_arg)
