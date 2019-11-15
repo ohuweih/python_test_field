@@ -1,7 +1,9 @@
 #!/usr/bin/python
 import argparse
 from multiprocessing import Process
+import time
 
+start_time = time.time()
 # Create the parser
 my_parser = argparse.ArgumentParser(description='The Number we will be using')
 
@@ -14,27 +16,27 @@ input_arg = args.Num
 
 
 def FizzBuzz(input_arg):
-    if (input_arg % 3 == 0) and (input_arg % 5 == 0):
-        output = "FizzBuzz"
-    else:
-        output = input_arg
-    return output
+        if (input_arg % 3 == 0) and (input_arg% 5 == 0):
+            output = "FizzBuzz"
+        else:
+            output = input_arg
+        return output
 
 
 def Buzz(input_arg):
-    if (input_arg % 5 == 0):
-        output = "Buzz"
-    else:
-        output = input_arg
-    return output
+        if (input_arg % 5 == 0):
+            output = "Buzz"
+        else:
+            output = input_arg
+        return output
 
 
 def Fizz(input_arg):
-    if (input_arg % 3 == 0):
-        output = "Fizz"
-    else:
-        output = input_arg
-    return output
+        if (input_arg % 3 == 0):
+            output = "Fizz"
+        else:
+            output = input_arg
+        return output
 
 if __name__ == "__main__":
     # creating processes
@@ -52,12 +54,15 @@ if __name__ == "__main__":
     p2.join()
     p3.join()
     
+    for i in range(1, input_arg+1):
+        if (FizzBuzz(i) == "FizzBuzz"):
+            print(FizzBuzz(i))
+        elif (Buzz(i) == "Buzz"):
+            print(Buzz(i))
+        elif (Fizz(i) == "Fizz"):
+            print(Fizz(i))
+        else:
+            print(i)
 
-    if (FizzBuzz(input_arg) == "FizzBuzz"):
-        print(FizzBuzz(input_arg))
-    elif (Buzz(input_arg) == "Buzz"):
-        print(Buzz(input_arg))
-    elif (Fizz(input_arg) == "Fizz"):
-        print(Fizz(input_arg))
-    else:
-        print(input_arg)
+end_time = time.time()
+print('Total Execution Time:', end_time - start_time)
